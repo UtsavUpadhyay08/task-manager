@@ -1,10 +1,12 @@
 const express=require('express')
-const app=express()
-const port=process.env.PORT || 3000
+const userRouter=require('./routers/user')
 
 require('./db/mongoose')
 const User=require('./models/user')
 const Task=require('./models/tasks')
+
+const app=express()
+const port=process.env.PORT || 3000
 app.use(express.json())
 
 
@@ -119,7 +121,7 @@ app.patch('/tasks/:id',async(req,res)=>{
 
 app.delete('/tasks/:id',async(req,res)=>{
     try{
-        const task=Task.findByIdAndDelete(req.params.id)
+        const task=await Task.findByIdAndDelete(req.params.id)
         if(!task){
             res.status(404).send()
         }
