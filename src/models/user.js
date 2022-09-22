@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const validator=require('validator')
 
-const User=mongoose.model('User',{
+const usrSchema= new mongoose.Schema({
     name:{
         type:String,
         trim:true,
@@ -39,5 +39,7 @@ const User=mongoose.model('User',{
         }
     }
 })
+
+const User=mongoose.model('User',usrSchema)
 
 module.exports=User
